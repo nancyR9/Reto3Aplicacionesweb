@@ -21,22 +21,30 @@ public class CleaningProductRepository {
     private CleaningProdInterface crudInterface;
 
     public List<CleaningProduct> getAll() {
-        return crudInterface.findAll();
+        return (List<CleaningProduct>) crudInterface.findAll();
     }
 
     public Optional<CleaningProduct> getCleaningProd(Integer id) {
         return crudInterface.findById(id);
     }
 
-    public CleaningProduct create(CleaningProduct cleanProd) {
+    public CleaningProduct save(CleaningProduct cleanProd) {
         return crudInterface.save(cleanProd);
     }
-
+    
     public void update(CleaningProduct cleaningProd) {
         crudInterface.save(cleaningProd);
     }
 
     public void delete(CleaningProduct cleaningProd) {
         crudInterface.delete(cleaningProd);
+    }
+    
+    public List<CleaningProduct> getByPrice(double price){
+        return crudInterface.findByPriceLessThanEqual(price);
+    }
+
+    public List<CleaningProduct> getByDescriptionContains(String description){
+        return crudInterface.findByDescriptionContainingIgnoreCase(description);
     }
 }

@@ -28,11 +28,11 @@ public class CleaningProductService {
         return cleanProdRepository.getCleaningProd(id);
     }
 
-    public CleaningProduct create (CleaningProduct cleaningProduct){
+    public CleaningProduct save (CleaningProduct cleaningProduct){
         if (cleaningProduct.getId()== null) {
             return cleaningProduct;
         } else {
-            return cleanProdRepository.create(cleaningProduct);
+            return cleanProdRepository.save(cleaningProduct);
         }
           
     }
@@ -80,5 +80,13 @@ public class CleaningProductService {
             return true;
         }).orElse(false);
         return del;
+    }
+    
+     public List<CleaningProduct> getByPrice(double price){
+        return cleanProdRepository.getByPrice(price);
+    }
+
+    public List<CleaningProduct> getByDescriptionContains(String description){
+        return cleanProdRepository.getByDescriptionContains(description);
     }
 }

@@ -29,14 +29,14 @@ public class UserService {
         return userRepository.getUser(id);
     }
 
-    public User create(User user) {
+    public User save(User user) {
         if (user.getId() == null) {
             return user;            
         }else {
-            Optional<User> e = userRepository.getUser(user.getId());
-            if (e.isEmpty()) {
+            Optional<User> user1 = userRepository.getUser(user.getId());
+            if (user1.isEmpty()) {
                 if (emailExists(user.getEmail())==false){
-                    return userRepository.create(user);
+                    return userRepository.save(user);
                 }else{
                     return user;
                 }
@@ -112,5 +112,7 @@ public class UserService {
             return usuario.get();
         }
     }
-    
+     public List<User> getByMonthBirthDay(String month){
+        return userRepository.getByMonthBirthDay(month);
+    }
 }

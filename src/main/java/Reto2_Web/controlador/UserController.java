@@ -40,8 +40,8 @@ public class UserController {
 
     @PostMapping("/new")
     @ResponseStatus(HttpStatus.CREATED)
-    public User create(@RequestBody User user) {
-        return userService.create(user);
+    public void save(@RequestBody User user){
+        userService.save(user);
     }
     
     @PutMapping("/update")
@@ -68,5 +68,10 @@ public class UserController {
     @GetMapping("/{id}")
     public Optional<User> getUser(@PathVariable("id") Integer id) {
         return userService.getUser(id);
+    }
+    
+    @GetMapping("/birthday/{month}")
+    public List<User> getByMonthBirthDay(@PathVariable("month") String month){
+        return userService.getByMonthBirthDay(month);
     }
 }

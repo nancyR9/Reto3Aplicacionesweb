@@ -45,7 +45,7 @@ public class CleaningProductController {
     @PostMapping("/new")
     @ResponseStatus(HttpStatus.CREATED)
     public CleaningProduct create(@RequestBody CleaningProduct cleanProd) {
-        return cleaningProdService.create(cleanProd);
+        return cleaningProdService.save(cleanProd);
     }
 
     @PutMapping("/update")
@@ -58,6 +58,16 @@ public class CleaningProductController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public boolean delete(@PathVariable("id") Integer id) {
         return cleaningProdService.delete(id);
+    }
+    
+     @GetMapping("/price/{price}")
+    public List<CleaningProduct> getByPrice(@PathVariable("price") double price){
+        return cleaningProdService.getByPrice(price);
+    }
+
+    @GetMapping("/description/{description}")
+    public List<CleaningProduct> getByDescriptionContains(@PathVariable("description") String description){
+        return cleaningProdService.getByDescriptionContains(description);
     }
 
 }

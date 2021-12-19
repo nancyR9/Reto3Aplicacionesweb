@@ -2,6 +2,8 @@ package Reto2_Web.repositorio;
 
 import Reto2_Web.interfaces.OrderInterface;
 import Reto2_Web.modelo.Order;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -15,14 +17,14 @@ public class OrderRepository {
     private OrderInterface orderCrudRepository;
 
     public List<Order> getAll(){
-        return orderCrudRepository.findAll();
+         return (List<Order>) orderCrudRepository.findAll();
     }
 
     public Optional<Order> getOrder(Integer id){
         return orderCrudRepository.findById(id);
     }
 
-    public Order create(Order order){
+    public Order save(Order order){
         return orderCrudRepository.save(order);
     }
 
@@ -36,5 +38,21 @@ public class OrderRepository {
 
     public List<Order> getOrderByZone(String zone){
         return orderCrudRepository.findBySalesManZone(zone);
+    }
+    public List<Order> getOrderBySalesManId(int id){
+        return orderCrudRepository.findBySalesManId(id);
+    }
+
+    public List<Order> getOrderBySalesManIdAndStatus(int id, String status){
+        return orderCrudRepository.findBySalesManIdAndStatus(id, status);
+    }
+    
+    public List<Order> getByRegisterDayAndSalesManId(String registerDay, Integer id){
+        try {
+            return orderCrudRepository.findByRegisterDayAndSalesManId(new SimpleDateFormat("yyyy-MM-dd").parse(registerDay), id);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

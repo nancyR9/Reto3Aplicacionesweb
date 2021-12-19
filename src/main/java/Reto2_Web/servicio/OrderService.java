@@ -22,11 +22,11 @@ public class OrderService {
         return orderRepository.getOrder(id);
     }
 
-    public Order create(Order order){
+    public Order save(Order order){
         if (order.getId() == null){
             return order;
         } else {
-            return orderRepository.create(order);
+            return orderRepository.save(order);
         }
     }
 
@@ -34,27 +34,21 @@ public class OrderService {
         if (order.getId() != null){
             Optional<Order> dbOrder = orderRepository.getOrder(order.getId());
             if (!dbOrder.isEmpty()) {
-
                 if (order.getId() != null) {
                     dbOrder.get().setId(order.getId());
                 }
-
                 if (order.getRegisterDay() != null) {
                     dbOrder.get().setRegisterDay(order.getRegisterDay());
                 }
-
                 if (order.getStatus() != null) {
                     dbOrder.get().setStatus(order.getStatus());
                 }
-
                 if (order.getSalesMan() != null) {
                     dbOrder.get().setSalesMan(order.getSalesMan());
                 }
-
                 if (order.getProducts() != null) {
                     dbOrder.get().setProducts(order.getProducts());
                 }
-
                 if (order.getQuantities() != null) {
                     dbOrder.get().setQuantities(order.getQuantities());
                 }
@@ -77,5 +71,14 @@ public class OrderService {
 
     public List<Order> getOrderByZone(String zone){
         return orderRepository.getOrderByZone(zone);
+    }
+    public List<Order> getOrderBySalesManId(int id){
+        return orderRepository.getOrderBySalesManId(id);
+    }
+    public List<Order> getOrderBySalesManIdAndStatus(int id, String status){
+        return orderRepository.getOrderBySalesManIdAndStatus(id, status);
+    }
+    public List<Order> getByRegisterDayAndSalesManId(String registerDay, Integer id){
+        return orderRepository.getByRegisterDayAndSalesManId(registerDay, id);
     }
 }

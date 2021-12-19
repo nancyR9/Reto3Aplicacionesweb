@@ -16,7 +16,7 @@ import java.util.Date;
  *
  * @author USUARIO
  */
-@Document(collection = "usuarios")
+@Document(collection = "users")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
